@@ -1,0 +1,7 @@
+/obj
+/.vs
+
+/bin/Debug/*.exe
+/bin/Debug/*.pdb
+/bin/Debug/*.config
+/bin/Debug/x86

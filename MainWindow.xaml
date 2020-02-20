@@ -1,0 +1,132 @@
+﻿<Window x:Class="SteganographyWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SteganographyWPF"
+        xmlns:ui="clr-namespace:SteganographyWPF.UI"
+        mc:Ignorable="d"
+        Title="Steganography" Width="1720" Height="800" MinHeight="1" MinWidth="1" BorderThickness="1"
+        Background="White">
+    <Grid Background="White">
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="File">
+                    <MenuItem Name="menuOpen" Header="Open" Click="MenuOpen_OnClick" />
+                    <MenuItem Name="menuSave" Header="Save" Click="MenuSave_OnClick" />
+                    <MenuItem Header="Exit" Click="MenuExit_OnClick" />
+                </MenuItem>
+                <MenuItem Header="About" Click="MenuAbout_OnClick" />
+            </Menu>
+        </DockPanel>
+
+
+
+
+        <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" Background="White" Height="744">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+                <TextBox Text="SourcePicture" VerticalAlignment="Center" FontSize="22" Width="160" TextWrapping="Wrap"
+                         Margin="10,20,10,0" BorderThickness="0" />
+                <ui:ImageView HorizontalAlignment="Left" Margin="20" x:Name="SourcePic" VerticalAlignment="Center"
+                              Background="Cornsilk"
+                              Height="300"
+                              Width="300" />
+                <TextBox Name="subText"  VerticalAlignment="Center" FontSize="15" Width="200"
+                         TextWrapping="Wrap"
+                         Margin="30,20,30,0" BorderThickness="0" />
+                <TextBox Name="magText"  VerticalAlignment="Center" FontSize="15" Width="200"
+                         TextWrapping="Wrap"
+                         Margin="30,20,30,0" BorderThickness="0" />
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <TextBox Text="R-Channel" VerticalAlignment="Center" FontSize="20" TextWrapping="Wrap"
+                             BorderThickness="0" />
+                    <ui:ImageView HorizontalAlignment="Center" Margin="20" x:Name="ImageRchannel"
+                                  VerticalAlignment="Center"
+                                  Background="Cornsilk"
+                                  Height="200"
+                                  Width="200" />
+                </StackPanel>
+
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <TextBox Text="G-Channel and Gray" VerticalAlignment="Center" FontSize="20" TextWrapping="Wrap"
+                             Width="110" BorderThickness="0" />
+                    <ui:ImageView HorizontalAlignment="Center" Margin="20" x:Name="ImageGchannel"
+                                  VerticalAlignment="Center"
+                                  Background="Cornsilk"
+                                  Height="200"
+                                  Width="200" />
+                </StackPanel>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <TextBox Text="B-Channel" VerticalAlignment="Center" FontSize="20" TextWrapping="Wrap"
+                             BorderThickness="0" />
+                    <ui:ImageView HorizontalAlignment="Center" Margin="20" x:Name="ImageBchannel"
+                                  VerticalAlignment="Center"
+                                  Background="Cornsilk"
+                                  Height="200"
+                                  Width="200" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical" Width="200"
+                        Margin="5">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+
+                    <RadioButton Content="Gray" FontSize="24" Name="grayRadio" GroupName="radio"
+                                 Checked="GrayRadio_OnChecked" />
+                    <RadioButton Content="RGB" FontSize="24" Name="rgbRadio" Margin="20,0,0,0" GroupName="radio"
+                                 IsChecked="True" Checked="RgbRadio_OnChecked" />
+                </StackPanel>
+                <RadioButton Margin="55,65,55,15" Content="LSB" FontSize="30" Name="btnLSB" GroupName="processmode"
+                             Checked="BtnLSB_OnChecked" IsChecked="True" />
+                <RadioButton Margin="55,15,55,15" Content="DFT" FontSize="30" Name="btnDFT" GroupName="processmode"
+                             Checked="BtnDFT_OnChecked" />
+                <RadioButton Margin="55,15,55,15" Content="DCT" FontSize="30" Name="btnDCT" GroupName="processmode"
+                             Checked="BtnDCT_OnChecked" />
+
+                <Button Height="55" Width="120" Margin="15,55,15,15" Content="Select" FontSize="24" Name="btnSelect"
+                        Click="BtnSelect_OnClick" />
+                <Button Height="55" Width="120" Margin="15" Content="PreView" FontSize="24" Name="btnPreView"
+                        Click="BtnPreView_OnClick" />
+                <Button Height="55" Width="120" Margin="15" Content="Save" FontSize="24" Name="btnSave"
+                        Click="BtnSave_OnClick" />
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+                <ui:ImageView HorizontalAlignment="Center" Margin="20" x:Name="ImageRProcessed"
+                              VerticalAlignment="Center"
+                              Background="Cornsilk"
+                              Height="200"
+                              Width="200" />
+                <ui:ImageView HorizontalAlignment="Center" Margin="20" x:Name="ImageGProcessed"
+                              VerticalAlignment="Center"
+                              Background="Cornsilk"
+                              Height="200"
+                              Width="200" />
+                <ui:ImageView HorizontalAlignment="Center" Margin="20" x:Name="ImageBProcessed"
+                              VerticalAlignment="Center"
+                              Background="Cornsilk"
+                              Height="200"
+                              Width="200" />
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical" Margin="5">
+                <TextBox HorizontalAlignment="Center" Margin="45" x:Name="TextBoxR" VerticalAlignment="Center"
+                         TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Visible"
+                         Height="150"
+                         Width="150" />
+                <TextBox HorizontalAlignment="Center" Margin="45" x:Name="TextBoxG" VerticalAlignment="Center"
+                         TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Visible"
+                         Height="150"
+                         Width="150" />
+                <TextBox HorizontalAlignment="Center" Margin="45" x:Name="TextBoxB" VerticalAlignment="Center"
+                         TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Visible"
+                         Height="150"
+                         Width="150" />
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>
