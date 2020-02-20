@@ -8,3 +8,7 @@
 预览:
 
 ![image](https://github.com/TheDawnCc/Steganography/blob/master/Preview/Preview.png)
+
+Read:
+
+![image](https://github.com/TheDawnCc/Steganography/blob/master/Preview/GIF.gif)
