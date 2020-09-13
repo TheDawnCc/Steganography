@@ -183,13 +183,15 @@
     <Resource Include="favicon-20180511015510228.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\dft test.png" />
     <Resource Include="Images\dft.png" />
     <Resource Include="Images\lsb.png" />
     <Resource Include="Images\timg.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="License-LGPL.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\dct.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Emgu.CV.runtime.windows.cuda.blas.11.1.218\build\Emgu.CV.runtime.windows.cuda.blas.targets" Condition="Exists('packages\Emgu.CV.runtime.windows.cuda.blas.11.1.218\build\Emgu.CV.runtime.windows.cuda.blas.targets')" />
