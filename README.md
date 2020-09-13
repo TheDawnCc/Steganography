@@ -3,7 +3,7 @@
 
 环境:emgucv-windesktop_x64-cuda 3.3.0.2826 <https://sourceforge.net/projects/emgucv/files/emgucv/3.3/>
 
-搭建:安装完emgucv-windesktop_x64-cuda 3.3.0.2826后项目引用emgucv-windesktop_x64-cuda 3.3.0.2826/bin下的Emgu.CV.UI.dll,Emgu.CV.World.dll,ZedGraph.dll 然后拷贝x64文件夹到项目的bin/Debug目录下,否则会报DLLNotFound异常
+搭建:安装完emgucv-windesktop_x64-cuda 3.3.0.2826后项目引用emgucv-windesktop_x64-cuda 3.3.0.2826/bin下的Emgu.CV.UI.dll,Emgu.CV.World.dll,ZedGraph.dll 然后拷贝emgucv-windesktop_x64-cuda 3.3.0.2826/bin/x64文件夹到项目的bin/Debug目录下,否则会报DLLNotFound异常
 
 预览:
 
