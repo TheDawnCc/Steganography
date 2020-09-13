@@ -297,17 +297,29 @@ namespace SteganographyWPF.Util
             {
                 for (int j = 0; j < temp.Width; j++)
                 {
+                    var tbitmap = temp.ToBitmap();
+
                     if (processMode)
                     {
-                        for (int z = 0; z < 3; z++)
-                        {
-                            if ((byte) temp.GetData(i, j).GetValue(z) != 0)
-                                sum++;
-                        }
+                        //for (int z = 0; z < 3; z++)
+                        //{
+                        //    if ((byte) temp.GetData(i, j).GetValue(z) != 0)
+                        //        sum++;
+                        //}
+
+                        if (tbitmap.GetPixel(i, j).B != 0)
+                            sum++;
+                        if (tbitmap.GetPixel(i, j).G != 0)
+                            sum++;
+                        if (tbitmap.GetPixel(i, j).R != 0)
+                            sum++;
                     }
                     else
                     {
-                        if ((byte) temp.GetData(i, j).GetValue(0) != 0)
+                        //if ((byte) temp.GetData(i, j).GetValue(0) != 0)
+                        //    sum++;
+
+                        if (tbitmap.GetPixel(i, j).B != 0)
                             sum++;
                     }
                 }
@@ -339,26 +351,53 @@ namespace SteganographyWPF.Util
             {
                 for (int j = 0; j < temp.Width; j++)
                 {
+                    var tBitmap = temp.ToBitmap();
+                    var tColor = tBitmap.GetPixel(i, j);
+
                     if (processMode)
                     {
-                        for (int z = 0; z < 3; z++)
+                        //for (int z = 0; z < 3; z++)
+                        //{
+                        //    int vv = (byte) temp.GetData(i, j).GetValue(z);
+                        //    if (vv != 0)
+                        //    {
+                        //        sum++;
+                        //        avg += vv;
+                        //    }
+                        //}
+
+                        if (tColor.B != 0)
                         {
-                            int vv = (byte) temp.GetData(i, j).GetValue(z);
-                            if (vv != 0)
-                            {
-                                sum++;
-                                avg += vv;
-                            }
+                            sum++;
+                            avg += tColor.B;
+                        }
+
+                        if (tColor.G != 0)
+                        {
+                            sum++;
+                            avg += tColor.G;
+                        }
+
+                        if (tColor.R != 0)
+                        {
+                            sum++;
+                            avg += tColor.R;
                         }
                     }
                     else
                     {
-                        int vv = (byte) temp.GetData(i, j).GetValue(0);
-                        if (vv != 0)
+                        //int vv = (byte) temp.GetData(i, j).GetValue(0);
+                        //if (vv != 0)
+                        //{
+                        //    sum++;
+                        //    avg += vv;
+                        //}
+                        if (tColor.B != 0)
                         {
                             sum++;
-                            avg += vv;
+                            avg += tColor.B;
                         }
+
                     }
                 }
             }

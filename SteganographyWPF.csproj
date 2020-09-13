@@ -28,6 +28,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -56,17 +58,25 @@
     <ApplicationIcon>favicon-20180511015510228.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Emgu.CV.UI, Version=3.3.0.2826, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Environment\emgucv-windesktop_x64-cuda 3.3.0.2826\bin\Emgu.CV.UI.dll</HintPath>
+    <Reference Include="Emgu.CV.Bitmap, Version=4.4.0.4061, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <HintPath>packages\Emgu.CV.Bitmap.4.4.0.4061\lib\netstandard2.0\Emgu.CV.Bitmap.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.World, Version=3.3.0.2826, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Environment\emgucv-windesktop_x64-cuda 3.3.0.2826\bin\Emgu.CV.World.dll</HintPath>
+    <Reference Include="Emgu.CV.Platform.NetStandard, Version=4.4.0.4061, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <HintPath>packages\Emgu.CV.4.4.0.4061\lib\netstandard2.0\Emgu.CV.Platform.NetStandard.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Drawing.Common.4.7.0\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Drawing.Primitives.4.3.0\lib\net45\System.Drawing.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -79,9 +89,8 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="ZedGraph, Version=5.1.5.28844, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Environment\emgucv-windesktop_x64-cuda 3.3.0.2826\bin\ZedGraph.dll</HintPath>
+    <Reference Include="ZedGraph, Version=5.1.7.430, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <HintPath>packages\ZedGraph.5.1.7\lib\net35-Client\ZedGraph.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +155,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -153,12 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\timg.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\jh.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Out\" />
@@ -178,5 +182,33 @@
   <ItemGroup>
     <Resource Include="favicon-20180511015510228.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\dft test.png" />
+    <Resource Include="Images\dft.png" />
+    <Resource Include="Images\lsb.png" />
+    <Resource Include="Images\timg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="License-LGPL.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\Emgu.CV.runtime.windows.cuda.blas.11.1.218\build\Emgu.CV.runtime.windows.cuda.blas.targets" Condition="Exists('packages\Emgu.CV.runtime.windows.cuda.blas.11.1.218\build\Emgu.CV.runtime.windows.cuda.blas.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Emgu.CV.runtime.windows.cuda.blas.11.1.218\build\Emgu.CV.runtime.windows.cuda.blas.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Emgu.CV.runtime.windows.cuda.blas.11.1.218\build\Emgu.CV.runtime.windows.cuda.blas.targets'))" />
+    <Error Condition="!Exists('packages\Emgu.CV.runtime.windows.cuda.dnn.cnn.8.0.1\build\Emgu.CV.runtime.windows.cuda.dnn.cnn.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Emgu.CV.runtime.windows.cuda.dnn.cnn.8.0.1\build\Emgu.CV.runtime.windows.cuda.dnn.cnn.targets'))" />
+    <Error Condition="!Exists('packages\Emgu.CV.runtime.windows.cuda.dnn.ops.8.0.1\build\Emgu.CV.runtime.windows.cuda.dnn.ops.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Emgu.CV.runtime.windows.cuda.dnn.ops.8.0.1\build\Emgu.CV.runtime.windows.cuda.dnn.ops.targets'))" />
+    <Error Condition="!Exists('packages\Emgu.CV.runtime.windows.cuda.cufft.11.1.218\build\Emgu.CV.runtime.windows.cuda.cufft.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Emgu.CV.runtime.windows.cuda.cufft.11.1.218\build\Emgu.CV.runtime.windows.cuda.cufft.targets'))" />
+    <Error Condition="!Exists('packages\Emgu.CV.runtime.windows.cuda.dnn.8.0.1\build\Emgu.CV.runtime.windows.cuda.dnn.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Emgu.CV.runtime.windows.cuda.dnn.8.0.1\build\Emgu.CV.runtime.windows.cuda.dnn.targets'))" />
+    <Error Condition="!Exists('packages\Emgu.CV.runtime.windows.cuda.npp.11.1.218\build\Emgu.CV.runtime.windows.cuda.npp.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Emgu.CV.runtime.windows.cuda.npp.11.1.218\build\Emgu.CV.runtime.windows.cuda.npp.targets'))" />
+    <Error Condition="!Exists('packages\Emgu.CV.runtime.windows.cuda.4.4.0.4061\build\Emgu.CV.runtime.windows.cuda.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Emgu.CV.runtime.windows.cuda.4.4.0.4061\build\Emgu.CV.runtime.windows.cuda.targets'))" />
+  </Target>
+  <Import Project="packages\Emgu.CV.runtime.windows.cuda.dnn.cnn.8.0.1\build\Emgu.CV.runtime.windows.cuda.dnn.cnn.targets" Condition="Exists('packages\Emgu.CV.runtime.windows.cuda.dnn.cnn.8.0.1\build\Emgu.CV.runtime.windows.cuda.dnn.cnn.targets')" />
+  <Import Project="packages\Emgu.CV.runtime.windows.cuda.dnn.ops.8.0.1\build\Emgu.CV.runtime.windows.cuda.dnn.ops.targets" Condition="Exists('packages\Emgu.CV.runtime.windows.cuda.dnn.ops.8.0.1\build\Emgu.CV.runtime.windows.cuda.dnn.ops.targets')" />
+  <Import Project="packages\Emgu.CV.runtime.windows.cuda.cufft.11.1.218\build\Emgu.CV.runtime.windows.cuda.cufft.targets" Condition="Exists('packages\Emgu.CV.runtime.windows.cuda.cufft.11.1.218\build\Emgu.CV.runtime.windows.cuda.cufft.targets')" />
+  <Import Project="packages\Emgu.CV.runtime.windows.cuda.dnn.8.0.1\build\Emgu.CV.runtime.windows.cuda.dnn.targets" Condition="Exists('packages\Emgu.CV.runtime.windows.cuda.dnn.8.0.1\build\Emgu.CV.runtime.windows.cuda.dnn.targets')" />
+  <Import Project="packages\Emgu.CV.runtime.windows.cuda.npp.11.1.218\build\Emgu.CV.runtime.windows.cuda.npp.targets" Condition="Exists('packages\Emgu.CV.runtime.windows.cuda.npp.11.1.218\build\Emgu.CV.runtime.windows.cuda.npp.targets')" />
+  <Import Project="packages\Emgu.CV.runtime.windows.cuda.4.4.0.4061\build\Emgu.CV.runtime.windows.cuda.targets" Condition="Exists('packages\Emgu.CV.runtime.windows.cuda.4.4.0.4061\build\Emgu.CV.runtime.windows.cuda.targets')" />
 </Project>

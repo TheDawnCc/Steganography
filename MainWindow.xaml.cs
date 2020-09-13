@@ -1,23 +1,12 @@
-﻿using Emgu.CV;
-using Emgu.CV.Structure;
+﻿using Emgu.CV.Structure;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Media.Imaging;
-using Emgu.CV.CvEnum;
+using Emgu.CV;
 using Emgu.CV.Util;
-using Emgu.CV.Cuda;
-using Brushes = System.Windows.Media.Brushes;
-using Rectangle = System.Drawing.Rectangle;
 using SteganographyWPF.Util;
-using ZedGraph;
-using Line = System.Windows.Shapes.Line;
 
 //StopWatch
 
@@ -50,19 +39,19 @@ namespace SteganographyWPF
             if (openFileDialog.ShowDialog() == true)
             {
                 mMat = CvInvoke.Imread(openFileDialog.FileName);
-                
-                SourcePic.ImageSource = BitmapHelper.BitmapToBitmapSource(mMat.Bitmap);
+
+                SourcePic.ImageSource = BitmapHelper.BitmapToBitmapSource(mMat.ToBitmap());
                 imageProcess = new ImageProcess(mMat, imageMode);
 
                 if (imageMode)
                 {
-                    ImageRchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.rImage.Bitmap);
-                    ImageGchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.gImage.Bitmap);
-                    ImageBchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.bImage.Bitmap);
+                    ImageRchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.rImage.ToBitmap());
+                    ImageGchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.gImage.ToBitmap());
+                    ImageBchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.bImage.ToBitmap());
                 }
                 else
                 {
-                    ImageGchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.grayImage.Bitmap);
+                    ImageGchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.grayImage.ToBitmap());
                 }
                 modeChange();
             }
@@ -187,18 +176,18 @@ namespace SteganographyWPF
                 mMat = CvInvoke.Imread(openFileDialog.FileName);
 
 
-                SourcePic.ImageSource = BitmapHelper.BitmapToBitmapSource(mMat.Bitmap);
+                SourcePic.ImageSource = BitmapHelper.BitmapToBitmapSource(mMat.ToBitmap());
                 imageProcess = new ImageProcess(mMat, imageMode);
 
                 if (imageMode)
                 {
-                    ImageRchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.rImage.Bitmap);
-                    ImageGchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.gImage.Bitmap);
-                    ImageBchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.bImage.Bitmap);
+                    ImageRchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.rImage.ToBitmap());
+                    ImageGchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.gImage.ToBitmap());
+                    ImageBchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.bImage.ToBitmap());
                 }
                 else
                 {
-                    ImageGchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.grayImage.Bitmap);
+                    ImageGchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.grayImage.ToBitmap());
                 }
                 modeChange();
                 subText.Text = "";
@@ -231,8 +220,8 @@ namespace SteganographyWPF
             {
                 imageProcess.changeMode(true);
 
-                ImageRchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.rImage.Bitmap);
-                ImageBchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.bImage.Bitmap);
+                ImageRchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.rImage.ToBitmap());
+                ImageBchannel.ImageSource = BitmapHelper.BitmapToBitmapSource(imageProcess.bImage.ToBitmap());
             }
         }
 
@@ -284,9 +273,9 @@ namespace SteganographyWPF
 
                     vector = imageProcess.Dftspy();
 
-                    ImageRProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[0].Bitmap);
-                    ImageGProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[1].Bitmap);
-                    ImageBProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[2].Bitmap);
+                    ImageRProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[0].ToBitmap());
+                    ImageGProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[1].ToBitmap());
+                    ImageBProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[2].ToBitmap());
                 }
 
 
@@ -296,9 +285,9 @@ namespace SteganographyWPF
 
                     vector = imageProcess.Dctspy();
 
-                    ImageRProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[0].Bitmap);
-                    ImageGProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[1].Bitmap);
-                    ImageBProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[2].Bitmap);
+                    ImageRProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[0].ToBitmap());
+                    ImageGProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[1].ToBitmap());
+                    ImageBProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[2].ToBitmap());
                 }
             }
             else
@@ -321,7 +310,7 @@ namespace SteganographyWPF
 
                     vector = imageProcess.Dftspy();
 
-                    ImageGProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[0].Bitmap);
+                    ImageGProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[0].ToBitmap());
                 }
 
 
@@ -331,7 +320,7 @@ namespace SteganographyWPF
 
                     vector = imageProcess.Dctspy();
 
-                    ImageGProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[0].Bitmap);
+                    ImageGProcessed.ImageSource = BitmapHelper.BitmapToBitmapSource(vector[0].ToBitmap());
                 }
             }
         }
