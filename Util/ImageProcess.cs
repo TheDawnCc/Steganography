@@ -293,9 +293,9 @@ namespace SteganographyWPF.Util
             }
 
             double sum = 0;
-            for (int i = 0; i < temp.Width; i++)
+            for (int i = 0; i < temp.Height; i++)
             {
-                for (int j = 0; j < temp.Height; j++)
+                for (int j = 0; j < temp.Width; j++)
                 {
                     var tbitmap = temp.ToBitmap();
 
@@ -347,9 +347,9 @@ namespace SteganographyWPF.Util
 
             double sum = 0;
             double avg = 0;
-            for (int i = 0; i < temp.Width; i++)
+            for (int i = 0; i < temp.Height; i++)
             {
-                for (int j = 0; j < temp.Height; j++)
+                for (int j = 0; j < temp.Width; j++)
                 {
                     var tBitmap = temp.ToBitmap();
                     var tColor = tBitmap.GetPixel(i, j);

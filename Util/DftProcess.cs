@@ -24,9 +24,6 @@ namespace SteganographyWPF.Util
         private Mat magnitudeMat;
         private Mat phaseMat;
 
-        private Mat dftMat;
-        private Mat idftMat;
-
         //处理过的幅度图
         private Mat magPMat;
 
@@ -42,9 +39,6 @@ namespace SteganographyWPF.Util
             magnitudeMat = new Mat();
             phaseMat = new Mat();
             magPMat = new Mat();
-
-            dftMat = new Mat();
-            idftMat = new Mat();
 
             sourceMat.CopyTo(this.sourceMat);
             
@@ -82,40 +76,39 @@ namespace SteganographyWPF.Util
             CvInvoke.Merge(planes, complexI);
 
             //进行DFT变换
-            CvInvoke.Dft(complexI, dftMat, DxtType.Forward, padded.Rows);
+            CvInvoke.Dft(complexI, complexI, DxtType.Forward, padded.Rows);
 
+            //将混合的单通道分离实数域虚数域
+            CvInvoke.Split(complexI, planes);
 
             //计算幅度谱,相位谱
+            CudaInvoke.Magnitude(planes[0], planes[1], magnitudeMat);
+            CudaInvoke.Phase(planes[0], planes[1], phaseMat);
 
-            //TODO: Cuda必须GPU支持，改写为不需要Cuda的写法
-            //CudaInvoke.Magnitude(planes[0], planes[1], magnitudeMat);
-            //CudaInvoke.Phase(planes[0], planes[1], phaseMat);
-
-            var mag = Magnitude(dftMat);
-
-            mag.CopyTo(magPMat);
+            
+            magnitudeMat.CopyTo(magPMat);
         }
 
         public Mat IDFT()
         {
-            //Mat realMat = new Mat();
-            //Mat complexMat = new Mat();
+            Mat realMat = new Mat();
+            Mat complexMat = new Mat();
 
-            ////用幅度谱和相位谱计算实部和虚部
-            //CvInvoke.PolarToCart(magPMat, phaseMat, realMat, complexMat);
+            //用幅度谱和相位谱计算实部和虚部
+            CvInvoke.PolarToCart(magPMat, phaseMat, realMat, complexMat);
 
-            //Mat idft = new Mat();
+            Mat idft = new Mat();
 
-            //CvInvoke.Merge(new VectorOfMat(realMat, complexMat), idft);
+            CvInvoke.Merge(new VectorOfMat(realMat, complexMat), idft);
 
             //逆傅里叶变换
-            CvInvoke.Dft(dftMat, idftMat, DxtType.Inverse, dftMat.Rows);
+            CvInvoke.Dft(idft, idft, DxtType.Inverse, idft.Rows);
 
-            var mag = Magnitude(idftMat);
-
+            VectorOfMat planes = new VectorOfMat();
+            CvInvoke.Split(idft, planes);
 
             //裁剪因FFT而扩展的区域
-            Mat resMat = new Mat(mag, new Rectangle(0, 0, sourceMat.Width, sourceMat.Height));
+            Mat resMat = new Mat(planes[0], new Rectangle(0, 0, sourceMat.Width, sourceMat.Height));
 
             //将数值缩放到0-255并将float转为byte格式以便识别
             CvInvoke.Normalize(resMat, resMat, 0, 255, NormType.MinMax);
@@ -212,23 +205,6 @@ namespace SteganographyWPF.Util
             magI.ConvertTo(magI, DepthType.Cv8U);
 
             return magI;
-        }
-
-        public Mat Magnitude(Mat input)
-        {
-            VectorOfMat planes = new VectorOfMat();
-
-            //将混合的单通道分离实数域虚数域
-            CvInvoke.Split(input, planes);
-
-            Mat output = new Mat();
-
-            CvInvoke.Pow(planes[0], 2, planes[0]);
-            CvInvoke.Pow(planes[1], 2, planes[1]);
-            CvInvoke.Add(planes[0], planes[1], output);
-            CvInvoke.Log(output, output);
-
-            return output;
         }
     }
 }

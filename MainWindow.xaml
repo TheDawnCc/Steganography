@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SteganographyWPF"
         xmlns:ui="clr-namespace:SteganographyWPF.UI"
         mc:Ignorable="d"
-        Title="Steganography" Width="1280" Height="960" MinHeight="1" MinWidth="1" BorderThickness="1"
+        Title="Steganography" Width="1720" Height="800" MinHeight="1" MinWidth="1" BorderThickness="1"
         Background="White">
     <Grid Background="White">
         <DockPanel>
@@ -20,7 +20,10 @@
             </Menu>
         </DockPanel>
 
-        <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" Background="White" >
+
+
+
+        <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" Background="White" Height="744">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
                 <TextBox Text="SourcePicture" VerticalAlignment="Center" FontSize="22" Width="160" TextWrapping="Wrap"
                          Margin="10,20,10,0" BorderThickness="0" />
@@ -125,6 +128,5 @@
             </StackPanel>
         </StackPanel>
 
-        <ui:Loading x:Name="Loading" Visibility="Hidden"/>
     </Grid>
 </Window>
